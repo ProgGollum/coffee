@@ -1,0 +1,44 @@
+//Variables
+@import "../../variables";
+
+.header {
+  padding: 18px 0;
+  border-bottom: 1px solid #32323D;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.nav {
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__item {
+    &_link {
+      text-transform: uppercase;
+      font-size: 15px;
+      font-weight: 600;
+
+      &.active {
+        color: $accent-color;
+      }
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  &__button {
+    font-size: 1.5rem;
+  }
+}

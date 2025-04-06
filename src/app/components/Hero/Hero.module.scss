@@ -1,0 +1,41 @@
+.hero {
+  margin-bottom: 6.25rem;
+  background-image: url(../../../../public/hero-bg.jpeg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(2, 2, 4, 0.55);
+    position: absolute;
+  }
+
+
+  &__wrapper {
+    position: relative;
+    max-width: 570px;
+    padding: 200px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  &__title {
+    font-size: 60px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+}

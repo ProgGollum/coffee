@@ -1,0 +1,49 @@
+//Variables
+@import "../../variables";
+
+.catalog {
+  margin-bottom: 5rem;
+
+  &__title {
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  &__item {
+    background-color: $light-dark-bg-color;
+    border-radius: 10px;
+    padding: 1.5rem;
+
+    .item__img {
+      display: block;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .item__title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 1.875rem;
+      text-transform: uppercase;
+    }
+
+    .item__price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &_fav {
+        font-size: 1.875rem;
+      }
+    }
+  }
+}
