@@ -12,10 +12,25 @@
     padding-right: 4.375rem;
     background-color: $light-dark-bg-color;
 
+    @media (max-width: 960px) {
+      flex-direction: column;
+      padding: 0 15px 15px 15px;
+    }
+
     &_img {
       position: relative;
       img {
         border-radius: 10px 0 0 10px;
+        aspect-ratio: auto;
+
+        @media (max-width: 1120px) {
+          width: 500px;
+        }
+
+        @media (max-width: 960px) {
+          width: 100%;
+        }
+
       }
 
       &:before {
@@ -31,11 +46,18 @@
     }
 
     &_disc {
+      @media (max-width: 960px) {
+        text-align: center;
+      }
       h2 {
         font-size: 24px;
         font-weight: 900;
         text-transform: uppercase;
         margin-bottom: 1rem;
+
+        @media (max-width: 1120px) {
+          font-size: 20px;
+        }
       }
     }
   }

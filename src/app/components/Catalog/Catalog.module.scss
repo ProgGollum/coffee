@@ -10,12 +10,24 @@
     margin-bottom: 2.5rem;
     text-transform: uppercase;
     color: #ffffff;
+
+    @media (max-width: 1120px) {
+      font-size: 35px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 30px;
+    }
   }
 
   &__list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
+
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 
   &__item {
@@ -27,6 +39,10 @@
       display: block;
       text-align: center;
       margin-bottom: 2.5rem;
+
+      img {
+        max-width: 100%;
+      }
     }
 
     .item__title {
@@ -34,6 +50,10 @@
       font-weight: 900;
       margin-bottom: 1.875rem;
       text-transform: uppercase;
+
+      @media (max-width: 960px) {
+        font-size: 1.25rem;
+      }
     }
 
     .item__price {

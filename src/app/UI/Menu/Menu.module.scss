@@ -1,0 +1,60 @@
+//Variables
+@import "../../variables";
+
+.menu {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 5;
+  transform: translateX(200%);
+  transition: all .3s ease;
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  &__content {
+    padding: 1.25rem;
+    width: 50vw;
+    height: 100%;
+    background-color: $light-dark-bg-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+  &__item {
+    &_link {
+      text-transform: uppercase;
+      font-size: 15px;
+      font-weight: 600;
+
+      &.active_link {
+        color: $accent-color;
+      }
+    }
+  }
+
+
+  .user__buttons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .button {
+      &__link > img {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

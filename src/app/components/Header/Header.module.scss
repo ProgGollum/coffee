@@ -14,6 +14,10 @@
 
 .nav {
 
+  @media (max-width: 640px) {
+    display: none;
+  }
+
   &__list {
     display: flex;
     align-items: center;
@@ -38,7 +42,21 @@
   align-items: center;
   gap: 2rem;
 
+  @media (max-width: 640px) {
+    display: none;
+  }
+
   &__button {
     font-size: 1.5rem;
   }
+}
+
+.menu__button {
+  display: none;
+
+  @media (max-width: 640px) {
+    display: block;
+    font-size: 1.5rem;
+  }
+
 }

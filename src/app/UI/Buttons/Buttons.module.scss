@@ -12,6 +12,14 @@
   color: #ffffff;
   border-radius: 10px;
 
+  @media (max-width: 1120px) {
+    width: 170px;
+  }
+
+  @media (max-width: 800px) {
+    width: 150px;
+  }
+
   &.transparent_button {
     background-color: transparent;
     border: 1px solid $button-border-color;
