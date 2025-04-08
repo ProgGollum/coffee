@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Hero.module.scss"
-import Buttons from "@/app/UI/Buttons/Buttons";
+import Buttons from "@/UI/Buttons/Buttons";
 
 const Hero = () => {
     return (

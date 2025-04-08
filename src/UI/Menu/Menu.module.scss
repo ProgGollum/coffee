@@ -1,5 +1,5 @@
 //Variables
-@import "../../variables";
+@import "../../app/variables";
 
 .menu {
   position: fixed;
@@ -8,7 +8,7 @@
   top: 0;
   right: 0;
   z-index: 5;
-  transform: translateX(200%);
+  transform: translateX(-200%);
   transition: all .3s ease;
 
   &.active {
@@ -17,7 +17,7 @@
 
   &__content {
     padding: 1.25rem;
-    width: 50vw;
+    width: 50%;
     height: 100%;
     background-color: $light-dark-bg-color;
     display: flex;

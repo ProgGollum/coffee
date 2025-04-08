@@ -5,7 +5,7 @@ import s from "./Header.module.scss"
 import Link from "next/link";
 
 import Image from "next/image";
-import logo from "../../../../public/logo.svg";
+import logo from "../../../public/logo.svg";
 import {CgProfile} from "react-icons/cg";
 import {CiHeart} from "react-icons/ci";
 import {FaShoppingCart} from "react-icons/fa";
@@ -13,7 +13,7 @@ import { RiMenuFoldLine } from "react-icons/ri";
 
 import classNames from "classnames";
 import {usePathname} from "next/navigation";
-import Menu from "@/app/UI/Menu/Menu";
+import Menu from "@/UI/Menu/Menu";
 import IMenu from "@/types/IMenu";
 import IUserButtons from "@/types/IUserButtons";
 

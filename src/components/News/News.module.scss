@@ -1,5 +1,5 @@
 //Variables
-@import "../../variables";
+@import "../../app/variables";
 
 .news {
   margin-bottom: 5rem;
@@ -40,6 +40,7 @@
       img {
         border-radius: 10px;
         max-width: 100%;
+        object-fit: cover;
       }
     }
 

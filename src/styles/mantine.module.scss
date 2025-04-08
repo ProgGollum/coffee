@@ -1,0 +1,39 @@
+.chip__iconWrapper {
+  display: none;
+}
+
+.chip__label {
+  border-radius: 5px;
+  padding: 0.5rem 0;
+  min-width: 3.125rem;
+  height: 3.125rem;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+
+
+
+  &:not([data-disabled]) {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+
+    &:hover {
+      color: #000000;
+    }
+  }
+
+  &[data-checked] {
+    border: 2px solid #C7A17A;
+    
+    &:hover {
+      background: #C7A17A;
+    }
+  }
+}
+
+.chip__root {
+
+  background-color: transparent;
+  color: #ffffff;
+}

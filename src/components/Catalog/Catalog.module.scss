@@ -1,5 +1,5 @@
 //Variables
-@import "../../variables";
+@import "../../app/variables";
 
 .catalog {
   margin-bottom: 5rem;
@@ -42,6 +42,7 @@
 
       img {
         max-width: 100%;
+        object-fit: cover;
       }
     }
 

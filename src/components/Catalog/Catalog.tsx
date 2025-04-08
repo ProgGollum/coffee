@@ -24,7 +24,7 @@ const Catalog = () => {
 
     const fetchCoffeeData = async () => {
         try {
-            const response = await axios.get<Coffee[]>('https://api.sampleapis.com/coffee/hot');
+            const response = await axios.get<Coffee[]>(`https://api.sampleapis.com/coffee/hot`);
             setCoffee(response.data);
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -56,7 +56,7 @@ const Catalog = () => {
                 <ul className={s.catalog__list}>
                     {coffee.slice(0, 3).map(item => (
                         <li key={item.id} className={s.catalog__item}>
-                            <Link className={s.item__img} href={"/"}>
+                            <Link className={s.item__img} href={`/product/${item.id}`}>
                                 <img
                                     src={item.image}
                                     alt={"Coffee"}

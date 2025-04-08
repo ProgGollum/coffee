@@ -5,12 +5,12 @@ import classNames from "classnames";
 interface ButtonProps {
     text: string,
     isTransparent?: boolean,
-    width?: string
+    isBig?: boolean
 }
 
-const Buttons:FC<ButtonProps> = ({text, isTransparent, width}) => {
+const Buttons:FC<ButtonProps> = ({text, isTransparent, isBig}) => {
     return (
-        <button style={width ? {width: width} : {}} className={classNames(s.button, isTransparent ? s.transparent_button : {})}>
+        <button className={classNames(s.button, isTransparent ? s.transparent_button : {}, isBig ? s.big__button : {})}>
             {text}
         </button>
     );

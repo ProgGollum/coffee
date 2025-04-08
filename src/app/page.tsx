@@ -1,7 +1,7 @@
-import Hero from "@/app/components/Hero/Hero";
-import Roasted from "@/app/components/Roasted/Roasted";
-import Catalog from "@/app/components/Catalog/Catalog";
-import News from "@/app/components/News/News";
+import Hero from "@/components/Hero/Hero";
+import Roasted from "@/components/Roasted/Roasted";
+import Catalog from "@/components/Catalog/Catalog";
+import News from "@/components/News/News";
 
 export default function Home() {
     return (

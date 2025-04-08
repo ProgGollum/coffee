@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./Roasted.module.scss"
 
 import Image from "next/image";
-import roasted_img from "../../../../public/roasted.jpeg"
+import roasted_img from "../../../public/roasted.jpeg"
 
 const Roasted = () => {
     return (

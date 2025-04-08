@@ -1,5 +1,5 @@
 //Variables
-@import "../../variables";
+@import "../../app/variables";
 
 .button {
   padding: 14px 0;
@@ -23,6 +23,18 @@
   &.transparent_button {
     background-color: transparent;
     border: 1px solid $button-border-color;
+  }
+
+  &.big__button {
+    width: 360px;
+
+    @media (max-width: 1120px) {
+      width: 320px;
+    }
+
+    @media (max-width: 960px) {
+      width: 280px;
+    }
   }
 }
 
