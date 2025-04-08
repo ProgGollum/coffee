@@ -1,4 +1,6 @@
-import {createContext, FC, ReactNode, useState} from "react";
+'use client'
+
+import {createContext, FC, ReactNode, useContext, useEffect, useState} from "react";
 
 interface Coffee {
     id: number,
@@ -9,7 +11,7 @@ interface Coffee {
 }
 
 interface CartContextType {
-    cart: Coffee[] | null,
+    cartItems: Coffee[] | null,
     addToCart: (coffee: Coffee) => void,
     removeFromCart: (id: number) => void
 }
@@ -17,19 +19,62 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | null>(null)
 
 export const CartProvider:FC<{children: ReactNode}> = ({children}) => {
-    const [cart, setCart] = useState<Coffee[]>([])
+    const [cartItems, setCartItems] = useState<Coffee[]>(() => {
+        if (typeof window !== 'undefined') {
+            const savedCart = localStorage.getItem('cartItems');
+            return savedCart ? JSON.parse(savedCart) : [];
+        }
+        return [];
+    })
 
     const addToCart = (coffee: Coffee) => {
-        setCart((prev) => ([...prev, coffee]))
+        setCartItems((prev) => {
+            const updatedItems = [...prev, coffee];
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+            }
+            return updatedItems;
+        });
     }
 
     const removeFromCart = (id: number) => {
-        setCart((prev) => prev.filter((product) => product.id !== id))
+        setCartItems((prev) => {
+            const updatedItems = prev.filter(item => item.id !== id);
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+            }
+            return updatedItems;
+        });
     }
 
-    return (
-        <div>
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const handleStorageChange = () => {
+                const savedCart = localStorage.getItem('cartItems');
+                if (savedCart) {
+                    setCartItems(JSON.parse(savedCart));
+                }
+            };
 
-        </div>
+            window.addEventListener('storage', handleStorageChange);
+
+            return () => {
+                window.removeEventListener('storage', handleStorageChange);
+            };
+        }
+    }, []);
+
+    return (
+        <CartContext.Provider value={{cartItems, addToCart, removeFromCart}}>
+            {children}
+        </CartContext.Provider>
     )
 }
+
+export const useCart = () => {
+    const context = useContext(CartContext);
+    if (!context) {
+        throw new Error('useCart must be used within a CartProvider');
+    }
+    return context;
+};

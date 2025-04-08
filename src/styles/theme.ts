@@ -1,6 +1,6 @@
 'use client'
 
-import {createTheme, Chip, Button} from "@mantine/core";
+import {createTheme, Chip, Button, NativeSelect} from "@mantine/core";
 import s from "./mantine.module.scss"
 
 export const theme = createTheme({
@@ -12,5 +12,10 @@ export const theme = createTheme({
                 root: s.chip__root
             }
         }),
+        NativeSelect: NativeSelect.extend({
+            classNames: {
+                root: s.select__root
+            }
+        })
     }
 });

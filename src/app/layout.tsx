@@ -7,6 +7,7 @@ import Footer from "@/components/Footer/Footer";
 import {mantineHtmlProps, MantineProvider} from "@mantine/core";
 import { ColorSchemeScript } from '@mantine/core';
 import {theme} from "@/styles/theme";
+import {CartProvider} from "@/context/CoffeeContext";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -36,9 +37,11 @@ export default function RootLayout({
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable}`}>
                 <MantineProvider theme={theme}>
-                    <Header/>
-                    {children}
-                    <Footer/>
+                    <CartProvider>
+                        <Header/>
+                        {children}
+                        <Footer/>
+                    </CartProvider>
                 </MantineProvider>
             </body>
         </html>

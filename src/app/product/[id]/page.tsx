@@ -7,20 +7,24 @@ import {useParams} from "next/navigation";
 import Image from "next/image"
 import {Chip} from '@mantine/core';
 import Buttons from "@/UI/Buttons/Buttons";
+import {useCart} from "@/context/CoffeeContext";
 
 interface Coffee {
     id: number,
     title: string,
     description: string,
     image: string,
-    price: string
+    price: number
 }
 
 const Page = () => {
     const params = useParams<{ id: string }>()
     const [coffee, setCoffee] = useState<Coffee | null>(null);
     const [error, setError] = useState<string | null>(null)
-    const [loading, setLoading] = useState<boolean>(true)
+    const [loading, setLoading] = useState<boolean>(true);
+    const [selectedSize, setSelectedSize] = useState<string>("XL");
+
+    const {addToCart} = useCart();
 
     const fetchCoffeeData = async () => {
         try {
@@ -67,15 +71,26 @@ const Page = () => {
                                 $ {coffee?.price}
                             </span>
                             <div className={s.product__info_sizes}>
-                                <Chip>L</Chip>
-                                <Chip>XL</Chip>
-                                <Chip>XXL</Chip>
+                                {['L', 'XL', 'XXl'].map(size => (
+                                    <Chip
+                                        key={size}
+                                        checked={selectedSize === size}
+                                        onChange={() => setSelectedSize(size)}
+                                    >
+                                        {size}
+                                    </Chip>
+                                ))}
                             </div>
-                            <Buttons text={"Add to cart"} isTransparent={false} isBig={true}/>
+                            <Buttons onClick={() => coffee && selectedSize && addToCart({
+                                ...coffee,
+                                size: selectedSize
+                            })} text={"Add to cart"} isTransparent={false} isBig={true}/>
                         </div>
                     </div>
                 </div>
             </section>
+
+
         </main>
     );
 };

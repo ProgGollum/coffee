@@ -30,7 +30,7 @@ const Header = () => {
     const userButtons: IUserButtons[] = [
         {id: 1, href: "/", icon: <CgProfile/>},
         {id: 2, href: "/", icon: <CiHeart/>},
-        {id: 3, href: "/", icon: <FaShoppingCart/>},
+        {id: 3, href: "/cart", icon: <FaShoppingCart/>},
     ]
 
     const pathname = usePathname();
@@ -71,7 +71,7 @@ const Header = () => {
                             <Link href={"/"}><CiHeart/></Link>
                         </li>
                         <li className={s.buttons__button}>
-                            <Link href={"/"}><FaShoppingCart/></Link>
+                            <Link href={"/cart"}><FaShoppingCart/></Link>
                         </li>
                     </ul>
                     <div className={s.menu__button} onClick={() => setIsActive(!isActive)}>
