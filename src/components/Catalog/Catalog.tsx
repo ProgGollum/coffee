@@ -1,72 +1,43 @@
 'use client'
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import s from "./Catalog.module.scss"
-import axios from "axios";
 
-import Image from "next/image";
 import { CiHeart } from "react-icons/ci";
 import Link from "next/link";
+import {useQuery} from "@apollo/client";
+import {GET_PRODUCTS} from "@/gql/gql";
+import {IProductsResponse} from "@/types/IProductResponse";
 
 
-interface Coffee {
-    id: number,
-    title: string,
-    description: string,
-    image: string,
-    price: string
-}
+
+
 
 const Catalog = () => {
-    const [coffee, setCoffee] = useState<Coffee[]>([]);
-    const [error, setError] = useState<string | null>(null)
-    const [loading, setLoading] = useState<boolean>(true)
+    const {loading, error, data} = useQuery<IProductsResponse>(GET_PRODUCTS);
+    const products = data?.products.edges;
 
-    const fetchCoffeeData = async () => {
-        try {
-            const response = await axios.get<Coffee[]>(`https://api.sampleapis.com/coffee/hot`);
-            setCoffee(response.data);
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                setError(error.message);
-            } else {
-                setError('Неизвестная ошибка');
-            }
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchCoffeeData();
-    }, []);
-
-    if (loading) {
-        return <div>Loading...</div>
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>
-    }
+    if (loading) return <p>...Loading</p>
+    if (error) return <p>Error: {error.message}</p>
 
     return (
         <section className={s.catalog}>
             <div className="container">
                 <h1 className={s.catalog__title}>Catalog</h1>
                 <ul className={s.catalog__list}>
-                    {coffee.slice(0, 3).map(item => (
-                        <li key={item.id} className={s.catalog__item}>
-                            <Link className={s.item__img} href={`/product/${item.id}`}>
+                    {products?.map(({node}) => (
+                        <li key={node.id} className={s.catalog__item}>
+                            <Link className={s.item__img} href={`/product/${node.slug}`}>
                                 <img
-                                    src={item.image}
-                                    alt={"Coffee"}
+                                    src={node.thumbnail.url}
+                                    alt={node.thumbnail.alt}
                                     width={"338px"}
                                     height={"200px"}
                                 />
                             </Link>
-                            <h2 className={s.item__title}>{item.title}</h2>
+                            <h2 className={s.item__title}>{node.name}</h2>
                             <div className={s.item__price}>
-                                <span>${item.price}</span>
+                                <span>{node.pricing.priceRange.start.gross.currency} {node.pricing.priceRange.start.gross.amount}</span>
                                 <button><CiHeart className={s.item__price_fav}/></button>
                             </div>
                         </li>

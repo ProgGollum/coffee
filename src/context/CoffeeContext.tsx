@@ -2,24 +2,38 @@
 
 import {createContext, FC, ReactNode, useContext, useEffect, useState} from "react";
 
-interface Coffee {
-    id: number,
-    image: string,
-    title: string,
-    size: string,
-    price: number
+interface IProduct {
+    id: string;
+    name: string;
+    slug: string;
+    thumbnail: {
+        url: string;
+        alt: string;
+    };
+    pricing: {
+        priceRange: {
+            start: {
+                gross: {
+                    currency: string;
+                    amount: number;
+                };
+            };
+        };
+    };
+    description: string;
+    size: string;
 }
 
 interface CartContextType {
-    cartItems: Coffee[] | null,
-    addToCart: (coffee: Coffee) => void,
-    removeFromCart: (id: number) => void
+    cartItems: IProduct[] | null,
+    addToCart: (product: IProduct) => void,
+    removeFromCart: (id: string) => void
 }
 
 const CartContext = createContext<CartContextType | null>(null)
 
 export const CartProvider:FC<{children: ReactNode}> = ({children}) => {
-    const [cartItems, setCartItems] = useState<Coffee[]>(() => {
+    const [cartItems, setCartItems] = useState<IProduct[]>(() => {
         if (typeof window !== 'undefined') {
             const savedCart = localStorage.getItem('cartItems');
             return savedCart ? JSON.parse(savedCart) : [];
@@ -27,9 +41,9 @@ export const CartProvider:FC<{children: ReactNode}> = ({children}) => {
         return [];
     })
 
-    const addToCart = (coffee: Coffee) => {
+    const addToCart = (product: IProduct) => {
         setCartItems((prev) => {
-            const updatedItems = [...prev, coffee];
+            const updatedItems = [...prev, product];
             if (typeof window !== 'undefined') {
                 localStorage.setItem('cartItems', JSON.stringify(updatedItems));
             }
@@ -37,7 +51,7 @@ export const CartProvider:FC<{children: ReactNode}> = ({children}) => {
         });
     }
 
-    const removeFromCart = (id: number) => {
+    const removeFromCart = (id: string) => {
         setCartItems((prev) => {
             const updatedItems = prev.filter(item => item.id !== id);
             if (typeof window !== 'undefined') {

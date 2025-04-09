@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.6",
     "@mantine/core": "^7.17.3",
     "@mantine/hooks": "^7.17.3",
     "axios": "^1.8.4",
     "classnames": "^2.5.1",
+    "graphql": "^16.10.0",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

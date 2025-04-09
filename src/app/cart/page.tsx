@@ -22,10 +22,10 @@ const Page = () => {
                         <ul className={s.cart__list}>
                             {cartItems?.map(item => (
                                 <li className={s.cart__list_item} key={item.id}>
-                                    <div className={s.item__img}><img src={item.image} alt=""/></div>
+                                    <div className={s.item__img}><img src={item.thumbnail.url} alt=""/></div>
                                     <div className={s.item__lines}>
                                         <div className={s.item__lines_upper}>
-                                            <span>{item.title}</span>
+                                            <span>{item.name}</span>
                                             <FaTrashAlt onClick={() => removeFromCart(item.id)}/>
                                         </div>
                                         <span className={s.item__lines_middle}>{item.size}</span>
@@ -37,7 +37,7 @@ const Page = () => {
                                                 radius="md"
                                                 data={['1', '2', '3', '4', '5']}
                                             />
-                                            <span>{item.price * value}</span>
+                                            <span>{item.pricing.priceRange.start.gross.amount * value}</span>
                                         </div>
                                     </div>
                                 </li>
