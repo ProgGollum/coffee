@@ -8,7 +8,7 @@ export default function Home() {
         <main className="main">
             <Hero/>
             <Roasted/>
-            <Catalog/>
+            <Catalog slice={6}/>
             <News/>
         </main>
     );

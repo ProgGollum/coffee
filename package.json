@@ -14,12 +14,14 @@
     "@mantine/hooks": "^7.17.3",
     "axios": "^1.8.4",
     "classnames": "^2.5.1",
+    "editorjs-html": "^4.0.5",
     "graphql": "^16.10.0",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "sass": "^1.86.3"
+    "sass": "^1.86.3",
+    "xss": "^1.0.15"
   },
   "devDependencies": {
     "@types/node": "^20",

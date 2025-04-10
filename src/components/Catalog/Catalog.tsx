@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, {FC} from 'react';
 import s from "./Catalog.module.scss"
 
 import { CiHeart } from "react-icons/ci";
@@ -9,11 +9,13 @@ import {useQuery} from "@apollo/client";
 import {GET_PRODUCTS} from "@/gql/gql";
 import {IProductsResponse} from "@/types/IProductResponse";
 
+interface CatalogProps {
+    slice: number
+}
 
 
 
-
-const Catalog = () => {
+const Catalog:FC<CatalogProps> = ({slice}) => {
     const {loading, error, data} = useQuery<IProductsResponse>(GET_PRODUCTS);
     const products = data?.products.edges;
 
@@ -25,7 +27,7 @@ const Catalog = () => {
             <div className="container">
                 <h1 className={s.catalog__title}>Catalog</h1>
                 <ul className={s.catalog__list}>
-                    {products?.map(({node}) => (
+                    {products?.slice(0, slice).map(({node}) => (
                         <li key={node.id} className={s.catalog__item}>
                             <Link className={s.item__img} href={`/product/${node.slug}`}>
                                 <img

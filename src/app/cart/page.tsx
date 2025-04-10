@@ -9,7 +9,7 @@ import Buttons from '@/UI/Buttons/Buttons';
 
 const Page = () => {
     const {cartItems, removeFromCart} = useCart()
-    const [value, setValue] = useState<number>(1)
+    // const [value, setValue] = useState<number>(1)
 
     return (
         <main className={s.cart}>
@@ -31,13 +31,12 @@ const Page = () => {
                                         <span className={s.item__lines_middle}>{item.size}</span>
                                         <div className={s.item__lines_under}>
                                             <NativeSelect
-                                                value={value}
-                                                onChange={(event) => setValue(Number(event.target.value))}
+
                                                 size="xs"
                                                 radius="md"
                                                 data={['1', '2', '3', '4', '5']}
                                             />
-                                            <span>{item.pricing.priceRange.start.gross.amount * value}</span>
+                                            <span>{item.pricing.priceRange.start.gross.amount}</span>
                                         </div>
                                     </div>
                                 </li>

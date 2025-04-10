@@ -6,10 +6,13 @@ import {useParams} from "next/navigation";
 import {useCart} from "@/context/CoffeeContext";
 import {useQuery} from "@apollo/client";
 import {GET_PRODUCT_BY_ID} from "@/gql/gql";
-import {devLog} from "@apollo/client/invariantErrorCodes";
-import {useRouter} from "next/router";
 import {Chip} from "@mantine/core";
 import Buttons from "@/UI/Buttons/Buttons";
+import edjsHTML from "editorjs-html"
+import {block} from "sharp";
+import xss from 'xss';
+import Catalog from "@/components/Catalog/Catalog";
+
 
 interface GetProductByIdResponse {
     product: {
@@ -35,8 +38,11 @@ interface GetProductByIdResponse {
 }
 
 
+
+
 const Page = () => {
     const {slug} = useParams<{ slug: string }>()
+
 
 
     const {loading, error, data} = useQuery<GetProductByIdResponse>(GET_PRODUCT_BY_ID, {
@@ -50,7 +56,9 @@ const Page = () => {
     if (loading) return <p>...Loading</p>
     if (error) return <p>Error: {error.message}</p>
     if (!product) return <p>Product not found</p>
-    console.log(product)
+    const descriptionObject = JSON.parse(product.description)
+    const edjsParser = edjsHTML();
+    let description_html = edjsParser.parse(descriptionObject)
 
 
     return (
@@ -90,6 +98,13 @@ const Page = () => {
                     </div>
                 </div>
             </section>
+            <section className={s.desc}>
+                <div className="container">
+                    <h1 className={s.desc__title}>Description</h1>
+                    <div className={s.desc__block} dangerouslySetInnerHTML={{__html: xss(description_html)}}/>
+                </div>
+            </section>
+            <Catalog slice={3}/>
         </main>
     );
 };

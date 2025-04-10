@@ -82,3 +82,24 @@
     }
   }
 }
+
+//Description
+.desc {
+  margin-bottom: 5rem;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 2rem;
+  }
+
+  &__block {
+    border-radius: 10px;
+    min-height: 270px;
+    background-color: $light-dark-bg-color;
+    padding: 1.875rem;
+    text-align: center;
+  }
+}

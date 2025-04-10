@@ -44,9 +44,7 @@ export const CartProvider:FC<{children: ReactNode}> = ({children}) => {
     const addToCart = (product: IProduct) => {
         setCartItems((prev) => {
             const updatedItems = [...prev, product];
-            if (typeof window !== 'undefined') {
-                localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-            }
+            localStorage.setItem('cartItems', JSON.stringify(updatedItems));
             return updatedItems;
         });
     }
@@ -54,15 +52,12 @@ export const CartProvider:FC<{children: ReactNode}> = ({children}) => {
     const removeFromCart = (id: string) => {
         setCartItems((prev) => {
             const updatedItems = prev.filter(item => item.id !== id);
-            if (typeof window !== 'undefined') {
-                localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-            }
+            localStorage.setItem('cartItems', JSON.stringify(updatedItems));
             return updatedItems;
         });
     }
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
             const handleStorageChange = () => {
                 const savedCart = localStorage.getItem('cartItems');
                 if (savedCart) {
@@ -75,7 +70,6 @@ export const CartProvider:FC<{children: ReactNode}> = ({children}) => {
             return () => {
                 window.removeEventListener('storage', handleStorageChange);
             };
-        }
     }, []);
 
     return (
