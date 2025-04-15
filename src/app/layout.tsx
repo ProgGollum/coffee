@@ -9,6 +9,7 @@ import {theme} from "@/styles/theme";
 import {CartProvider} from "@/context/CoffeeContext";
 import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
 import {GET_PRODUCTS} from "@/gql/gql";
+import {AuthProvider} from "@/context/AuthContext";
 
 const client = new ApolloClient({
     uri: 'https://store-risf0ubl.eu.saleor.cloud/graphql/',
@@ -31,11 +32,13 @@ export default function RootLayout({
             <body>
                 <MantineProvider theme={theme}>
                     <ApolloProvider client={client}>
-                        <CartProvider>
-                            <Header/>
-                            {children}
-                            <Footer/>
-                        </CartProvider>
+                        <AuthProvider>
+                            <CartProvider>
+                                <Header/>
+                                {children}
+                                <Footer/>
+                            </CartProvider>
+                        </AuthProvider>
                     </ApolloProvider>
                 </MantineProvider>
             </body>

@@ -54,3 +54,42 @@ export const GET_PRODUCT_BY_ID = gql(`
         }
     }
 `)
+
+//Mutations
+export const ACCOUNT_REGISTER = gql(`
+    mutation AccountRegister($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+        accountRegister(
+            input: {
+                firstName: $firstName
+                lastName: $lastName
+                email: $email
+                password: $password
+                redirectUrl: "https://store-risf0ubl.eu.saleor.cloud"
+                channel: "default-channel"
+            }
+        ) {
+            user {
+                id
+                email
+                firstName
+                lastName
+            }
+            errors {
+                field
+                message
+                code
+                addressType
+            }
+        }
+    }
+`);
+
+export const TOKEN_CREATE = gql(`
+    mutation TokenCreate ($email: String!, $password: String!) {
+        tokenCreate(email: $email, password: $password) {
+            token
+            refreshToken
+            csrfToken
+        }
+    }
+`)
