@@ -1,3 +1,6 @@
+//Variables
+@import "../app/variables";
+
 .chip__iconWrapper {
   display: none;
 }
@@ -50,5 +53,18 @@
 }
 
 .modal__body {
+  color: #ffffff;
+}
+
+//Input Wrapper
+.input__wrapper_label {
+  font-size: 1rem;
+}
+
+//Input
+.input__input {
+  height: 2.5rem;
+  border: 1px solid $accent-color;
+  background-color: #000000;
   color: #ffffff;
 }

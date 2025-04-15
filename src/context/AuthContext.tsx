@@ -4,7 +4,9 @@ import React, {createContext, FC, ReactNode, useContext, useEffect, useState} fr
 import {useRouter} from "next/navigation";
 
 type AuthContextType = {
+    isAuth: boolean
     login: (token: string) => void;
+    check: () => void;
 }
 
 interface IUser {
@@ -23,11 +25,20 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider:FC<{children: ReactNode}> = ({children}) => {
     const [token, setToken] = useState("");
+    const [isAuth, setIsAuth] = useState(false)
     const router = useRouter();
 
     const login = (token: string) => {
-            setToken(token);
-            router.push("/")
+        setToken(token);
+        router.push("/")
+    }
+
+    const check = () => {
+        const tokenCheck = localStorage.getItem("token");
+        if (tokenCheck) {
+            setIsAuth(true);
+            return true;
+        }
     }
 
     useEffect(() => {
@@ -37,7 +48,7 @@ export const AuthProvider:FC<{children: ReactNode}> = ({children}) => {
     }, [token]);
 
     return (
-        <AuthContext.Provider value={{login}}>
+        <AuthContext.Provider value={{login, check, isAuth}}>
             {children}
         </AuthContext.Provider>
     )
