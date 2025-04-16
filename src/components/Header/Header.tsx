@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import s from "./Header.module.scss"
 import Link from "next/link";
 
@@ -18,7 +18,9 @@ import IMenu from "@/types/IMenu";
 import IUserButtons from "@/types/IUserButtons";
 import {Modal} from "@mantine/core";
 import {useDisclosure} from "@mantine/hooks";
+
 import {useCart} from "@/context/CoffeeContext";
+import {useAuth} from "@/context/AuthContext";
 
 
 const Header = () => {
@@ -41,6 +43,10 @@ const Header = () => {
     const pathname = usePathname();
     const [isActive, setIsActive] = useState<boolean>(false)
     const {cartItems, removeFromCart} = useCart();
+    // @ts-ignore
+    const {isAuth, loading, logout} = useAuth();
+
+    if (loading) return <p>...Loading</p>
 
     return (
         <section className={s.header}>
@@ -71,13 +77,23 @@ const Header = () => {
                     </div>
                     <ul className={s.buttons}>
                         <li className={s.buttons__button}>
-                            <Link href={"/register"}><CgProfile/></Link>
+                            {isAuth ? (
+                                <div className={s.buttons__unauth}>
+                                    <button onClick={logout} className={s.buttons__unauth_button}>Log Out</button>
+                                    <Link className={classNames(pathname === "/profile" ? s.active : {})} href="/profile"><CgProfile size={"1.5rem"}/></Link>
+                                </div>
+                            ) : (
+                                <div className={s.buttons__auth}>
+                                    <Link className={s.buttons__auth_button} href="/login">Sign In</Link>
+                                    <Link className={classNames(s.buttons__auth_button, s.register)} href="/register">Sign Up</Link>
+                                </div>
+                            )}
                         </li>
                         <li className={s.buttons__button}>
-                            <Link href={"/"}><CiHeart/></Link>
+                            <Link href={"/"}><CiHeart size={"1.5rem"}/></Link>
                         </li>
                         <li className={s.buttons__button}>
-                            <FaShoppingCart style={{cursor: "pointer"}} onClick={open}/>
+                            <FaShoppingCart className={classNames(opened ? s.active : {})} size={"1.5rem"} style={{cursor: "pointer"}} onClick={open}/>
                         </li>
                     </ul>
                     <div className={s.menu__button} onClick={() => setIsActive(!isActive)}>
@@ -85,7 +101,7 @@ const Header = () => {
                     </div>
                     <Menu active={isActive} setActive={setIsActive} pathname={pathname} pages={pages}
                           userButtons={userButtons}/>
-                    <Modal opened={opened} onClose={close} withCloseButton={false} centered={true}>
+                    <Modal size={"xl"} opened={opened} onClose={close} withCloseButton={false} centered={true}>
                         <h1 className={s.modal__title}>Cart</h1>
                         {cartItems?.length === 0 ? (
                             <p>Cart is empty</p>

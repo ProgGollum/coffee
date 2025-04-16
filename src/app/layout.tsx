@@ -7,16 +7,32 @@ import Footer from "@/components/Footer/Footer";
 import {ColorSchemeScript, mantineHtmlProps, MantineProvider} from "@mantine/core";
 import {theme} from "@/styles/theme";
 import {CartProvider} from "@/context/CoffeeContext";
-import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
-import {GET_PRODUCTS} from "@/gql/gql";
+import {ApolloClient, ApolloProvider, HttpLink, InMemoryCache} from "@apollo/client";
 import {AuthProvider} from "@/context/AuthContext";
+import {setContext} from "@apollo/client/link/context";
 
-const client = new ApolloClient({
-    uri: 'https://store-risf0ubl.eu.saleor.cloud/graphql/',
-    cache: new InMemoryCache(),
+const httpLink = new HttpLink({
+    uri: 'https://store-risf0ubl.eu.saleor.cloud/graphql/'
 })
 
-client.query({query: GET_PRODUCTS}).then((result) => console.log(result));
+const authLink = setContext((_, {headers}) => {
+    const token = localStorage.getItem("token");
+    // const shouldAddToken = headers && headers['x-include-token'];
+
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : '',
+        }
+    }
+})
+
+// shouldAddToken &&
+
+const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+})
 
 export default function RootLayout({
                                        children,

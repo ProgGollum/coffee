@@ -4,21 +4,11 @@ import React, {createContext, FC, ReactNode, useContext, useEffect, useState} fr
 import {useRouter} from "next/navigation";
 
 type AuthContextType = {
-    isAuth: boolean
+    isAuth: boolean;
+    loading: boolean;
     login: (token: string) => void;
     check: () => void;
-}
-
-interface IUser {
-    id: string,
-    email: string,
-    firstName: string,
-    lastName: string
-}
-
-interface IToken {
-    token: string,
-    refreshToken: string,
+    logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -27,18 +17,36 @@ export const AuthProvider:FC<{children: ReactNode}> = ({children}) => {
     const [token, setToken] = useState("");
     const [isAuth, setIsAuth] = useState(false)
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const currentToken = localStorage.getItem("token")
+        if (currentToken) {
+            setIsAuth(true)
+        }
+        setLoading(false);
+    }, [token]);
 
     const login = (token: string) => {
         setToken(token);
-        router.push("/")
+        if (token) {
+            router.push("/")
+            setIsAuth(true)
+        }
     }
 
     const check = () => {
-        const tokenCheck = localStorage.getItem("token");
-        if (tokenCheck) {
+        if (localStorage.getItem("token")) {
             setIsAuth(true);
             return true;
         }
+        return false
+    }
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        setToken("");
+        setIsAuth(false)
     }
 
     useEffect(() => {
@@ -48,7 +56,7 @@ export const AuthProvider:FC<{children: ReactNode}> = ({children}) => {
     }, [token]);
 
     return (
-        <AuthContext.Provider value={{login, check, isAuth}}>
+        <AuthContext.Provider value={{login, check, logout, isAuth, loading}}>
             {children}
         </AuthContext.Provider>
     )

@@ -55,6 +55,18 @@ export const GET_PRODUCT_BY_ID = gql(`
     }
 `)
 
+export const ME_QUERY = gql(`
+    query Me {
+        me {
+            id
+            email
+            firstName
+            lastName
+        }
+    }
+`)
+
+
 //Mutations
 export const ACCOUNT_REGISTER = gql(`
     mutation AccountRegister($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
@@ -92,4 +104,4 @@ export const TOKEN_CREATE = gql(`
             csrfToken
         }
     }
-`)
+`);

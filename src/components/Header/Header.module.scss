@@ -37,6 +37,10 @@
   }
 }
 
+.active {
+  color: $accent-color;
+}
+
 .buttons {
   display: flex;
   align-items: center;
@@ -48,6 +52,41 @@
 
   &__button {
     font-size: 1.5rem;
+
+    .buttons__unauth {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      &_button {
+        padding: 0.5rem 1rem;
+        background-color: $accent-color;
+        border-radius: 0.625rem;
+      }
+    }
+
+    .buttons__auth {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      &_button {
+        padding: 0.5rem 1rem;
+        background-color: $accent-color;
+        border-radius: 0.625rem;
+
+        &.register {
+          background-color: transparent;
+          border: 1px solid $button-border-color;
+        }
+      }
+    }
   }
 }
 
