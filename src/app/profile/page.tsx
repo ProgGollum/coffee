@@ -7,14 +7,6 @@ import {ME_QUERY} from "@/gql/gql";
 const Page = () => {
     const {loading, error, data} = useQuery(ME_QUERY);
 
-    // {
-    //         context: {
-    //             headers: {
-    //                 'x-include-token': true,
-    //             },
-    //         },
-    //     }
-
     if (loading) return <p>...Loading</p>
     if (error) return <p>Error: {error.message}</p>
 

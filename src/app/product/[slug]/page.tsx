@@ -9,7 +9,6 @@ import {GET_PRODUCT_BY_ID} from "@/gql/gql";
 import {Chip} from "@mantine/core";
 import Buttons from "@/UI/Buttons/Buttons";
 import edjsHTML from "editorjs-html"
-import {block} from "sharp";
 import xss from 'xss';
 import Catalog from "@/components/Catalog/Catalog";
 
