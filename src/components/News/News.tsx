@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import s from "./News.module.scss"
 import axios from "axios";
 import {useQuery} from "@apollo/client";
-import {GET_CATEGORY, GET_PRODUCTS} from "@/gql/gql";
+import {GET_CATEGORY} from "@/gql/gql";
 import {IProductsResponse} from "@/types/IProductResponse";
 import edjsHTML from "editorjs-html";
 import xss from 'xss';
