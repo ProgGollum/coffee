@@ -16,5 +16,5 @@ export interface IProduct {
             };
         };
     };
-    description: string;
+    descriptionJson: string;
 }

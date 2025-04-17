@@ -1,29 +1,32 @@
 import {gql} from "@apollo/client";
 
-export const GET_PRODUCTS = gql(`
-    query Products {
-        products(channel: "default-channel", first: 6) {
-            totalCount
-            edges {
-                node {
-                    id
-                    name
-                    slug
-                    thumbnail(size: 256) {
-                        url
-                        alt
-                    }
-                    pricing {
-                        priceRange {
-                            start {
-                                gross {
-                                    currency
-                                    amount
+export const GET_CATEGORY = gql(`
+    query Category {
+        category(slug: "coffee") {
+            id
+            name
+            products(first: 6, channel: "default-channel") {
+                edges {
+                    node {
+                        id
+                        name
+                        slug
+                        description
+                        thumbnail(size: 256) {
+                            url
+                            alt
+                        }
+                        pricing {
+                            priceRange {
+                                start {
+                                    gross {
+                                        currency
+                                        amount
+                                    }
                                 }
                             }
                         }
                     }
-                    description
                 }
             }
         }
@@ -64,8 +67,19 @@ export const ME_QUERY = gql(`
             lastName
         }
     }
-`)
+`);
 
+export const TOKEN_REFRESH = gql(`
+    mutation TokenRefresh {
+        tokenRefresh {
+            token
+            errors {
+                field
+                message
+            }
+        }
+    }
+`);
 
 //Mutations
 export const ACCOUNT_REGISTER = gql(`

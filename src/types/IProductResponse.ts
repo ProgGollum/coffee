@@ -1,10 +1,13 @@
 import {IProduct} from "@/types/IProduct";
 
 export interface IProductsResponse {
-    products: {
-        totalCount: number;
-        edges: Array<{
-            node: IProduct;
-        }>;
-    };
+    category: {
+        id: string;
+        name: string;
+        products: {
+            edges: Array<{
+                node: IProduct;
+            }>;
+        };
+    }
 }

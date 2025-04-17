@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import s from "./News.module.scss"
 import axios from "axios";
 import {useQuery} from "@apollo/client";
-import {GET_PRODUCTS} from "@/gql/gql";
+import {GET_CATEGORY, GET_PRODUCTS} from "@/gql/gql";
 import {IProductsResponse} from "@/types/IProductResponse";
 import edjsHTML from "editorjs-html";
 import xss from 'xss';
@@ -12,8 +12,8 @@ import xss from 'xss';
 
 
 const News = () => {
-    const {loading, error, data} = useQuery<IProductsResponse>(GET_PRODUCTS)
-    const products = data?.products.edges;
+    const {loading, error, data} = useQuery<IProductsResponse>(GET_CATEGORY)
+    const products = data?.category.products.edges;
 
     if (loading) return <p>...Loading</p>
     if (error) return <p>Error: {error.message}</p>
@@ -30,6 +30,7 @@ const News = () => {
                             </div>
                             <div className={s.news__item_desc}>
                                 <h2>{node.name}</h2>
+                                {/*<p>{node.descriptionJson}</p>*/}
                                 <p dangerouslySetInnerHTML={{__html: xss(edjsHTML().parse(JSON.parse(node.description)))}}></p>
                             </div>
                         </li>

@@ -3,10 +3,10 @@
 import React, {FC} from 'react';
 import s from "./Catalog.module.scss"
 
-import { CiHeart } from "react-icons/ci";
+import {CiHeart} from "react-icons/ci";
 import Link from "next/link";
 import {useQuery} from "@apollo/client";
-import {GET_PRODUCTS} from "@/gql/gql";
+import {GET_CATEGORY} from "@/gql/gql";
 import {IProductsResponse} from "@/types/IProductResponse";
 
 interface CatalogProps {
@@ -16,8 +16,8 @@ interface CatalogProps {
 
 
 const Catalog:FC<CatalogProps> = ({slice}) => {
-    const {loading, error, data} = useQuery<IProductsResponse>(GET_PRODUCTS);
-    const products = data?.products.edges;
+    const {loading, error, data} = useQuery<IProductsResponse>(GET_CATEGORY);
+    const products = data?.category.products.edges;
 
     if (loading) return <p>...Loading</p>
     if (error) return <p>Error: {error.message}</p>
