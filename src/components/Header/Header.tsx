@@ -35,9 +35,9 @@ const Header = () => {
     ];
 
     const userButtons: IUserButtons[] = [
-        {id: 1, href: "/", icon: <CgProfile/>},
+        {id: 1, href: "/profile", icon: <CgProfile/>},
         {id: 2, href: "/", icon: <CiHeart/>},
-        {id: 3, href: "/cart", icon: <FaShoppingCart/>},
+        {id: 3, href: "/cart", icon: <FaShoppingCart/>, open: false},
     ]
 
     const pathname = usePathname();

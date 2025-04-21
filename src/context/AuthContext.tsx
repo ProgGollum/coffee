@@ -47,6 +47,7 @@ export const AuthProvider:FC<{children: ReactNode}> = ({children}) => {
         localStorage.removeItem("token");
         setToken("");
         setIsAuth(false)
+        router.push("/")
     }
 
     useEffect(() => {
