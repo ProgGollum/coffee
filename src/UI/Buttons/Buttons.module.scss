@@ -27,13 +27,14 @@
 
   &.big__button {
     width: 360px;
+    margin: 0 auto;
 
     @media (max-width: 1120px) {
       width: 320px;
     }
 
     @media (max-width: 960px) {
-      width: 280px;
+      width: 100%;
     }
   }
 }
